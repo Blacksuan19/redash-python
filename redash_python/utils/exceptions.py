@@ -1,0 +1,2 @@
+class DashboardNotFound(Exception):
+    pass
