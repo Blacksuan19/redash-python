@@ -1,1 +1,1 @@
- 
+from .redash import Redash
