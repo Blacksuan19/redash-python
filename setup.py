@@ -5,7 +5,7 @@ requirements = [
 ]
 setup(
     name="redash-python",
-    version="0.0.1",
+    version="0.0.2",
     author="Abubakar Yagoub",
     author_email="i@blacksuan19.dev",
     description="A more complete Python client for the Redash API",
