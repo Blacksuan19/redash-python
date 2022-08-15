@@ -39,3 +39,19 @@ class DashboardsService(BaseObject):
     def update(self, dashboard_id: int, properties: Dict) -> SimpleNamespace:
         """Update a dashboard by ID"""
         return self.__base.post(f"{self.endpoint}/{dashboard_id}", properties)
+
+    def archive(self, dashboard_id: int) -> SimpleNamespace:
+        """Archive a dashboard"""
+        return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"archived": True})
+
+    def unarchive(self, dashboard_id: int) -> SimpleNamespace:
+        """Unarchive a dashboard"""
+        return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"archived": False})
+
+    def publish(self, dashboard_id: int) -> SimpleNamespace:
+        """Publish a dashboard"""
+        return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"draft": False})
+
+    def unpublish(self, dashboard_id: int) -> SimpleNamespace:
+        """Unpublish a dashboard"""
+        return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"draft": True})

@@ -78,6 +78,7 @@ redash_python
 - [ ] Users
 - [ ] Widgets
 - [ ] Visualizations
+- [ ] Data Sources
 
 for a full list of implemented methods in each service, print the service
 object.
@@ -85,5 +86,5 @@ object.
 ```python
 
 >>> print(client.dashboards)
-DashboardsService(methods: ['create', 'get', 'get_all', 'get_id', 'get_slug', 'update'])
+DashboardsService(methods: ['archive', 'create', 'get', 'get_all', 'get_by_slug', 'get_id', 'get_slug', 'publish', 'unarchive', 'unpublish', 'update'])
 ```
