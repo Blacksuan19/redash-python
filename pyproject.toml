@@ -22,7 +22,8 @@ requires-python = ">=3.9"
 dev = ["black", "bumpver", "isort", "pip-tools", "pytest"]
 
 [project.urls]
-Homepage = "https://github.com/blacksuan19/redash_python"
+Homepage = "https://github.com/blacksuan19/redash-python"
+repository = "https://github.com/blacksuan19/redash-python/issues"
 
 
 [tool.bumpver]
