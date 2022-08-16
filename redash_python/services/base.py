@@ -12,7 +12,13 @@ class BaseObject:
             for method_name in dir(self)
             if callable(getattr(self, method_name)) and not method_name.startswith("_")
         ]
-        return f"{self.__class__.__name__}(methods: {object_methods})"
+        object_attributes = [
+            attribute_name
+            for attribute_name in dir(self)
+            if not callable(getattr(self, attribute_name))
+            and not attribute_name.startswith("_")
+        ]
+        return f"{self.__class__.__name__}(attributes: {object_attributes}, methods: {object_methods})"
 
     def __str__(self) -> str:
         return self.__repr__()
