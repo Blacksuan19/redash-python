@@ -7,6 +7,8 @@ from redash_python.services import (
     QueriesService,
 )
 
+version = "0.0.2"
+
 
 class Redash:
     """
@@ -23,6 +25,7 @@ class Redash:
     """
 
     def __init__(self, base_url: str, api_key: str) -> None:
+        self.version = version
 
         self.__base = BaseService(base_url, api_key)
 

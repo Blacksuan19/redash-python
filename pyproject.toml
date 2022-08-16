@@ -18,5 +18,22 @@ keywords = ["redash"]
 dependencies = ["requests"]
 requires-python = ">=3.9"
 
+[project.optional-dependencies]
+dev = ["black", "bumpver", "isort", "pip-tools", "pytest"]
+
 [project.urls]
 Homepage = "https://github.com/blacksuan19/redash_python"
+
+
+[tool.bumpver]
+current_version = "0.0.2"
+version_pattern = "MAJOR.MINOR.PATCH"
+commit_message  = "Bump version {old_version} -> {new_version}"
+commit = true
+tag = true
+push = true
+
+[tool.bumpver.file_patterns]
+"pyproject.toml" = ['current_version = "{version}"', 'version = "{version}"']
+"redash_python/redash.py" = ["{version}"]
+
