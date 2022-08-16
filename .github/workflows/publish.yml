@@ -35,11 +35,11 @@ jobs:
       - name: Upload artifact to action
         uses: actions/upload-artifact@v3
         with:
-          name: Wheel Package
+          name: Wheel Package2
           path: dist/*.whl
 
       - name: Publish package
-        if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags')
+        if: startsWith(github.ref, 'refs/tags')
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
