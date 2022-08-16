@@ -7,3 +7,4 @@ jetfiles_python.egg-info
 .ipynb_checkpoints
 .directory
 .vscode
+redash_python.egg-info
