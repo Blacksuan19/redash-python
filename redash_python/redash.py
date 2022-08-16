@@ -7,7 +7,7 @@ from redash_python.services import (
     QueriesService,
 )
 
-version = "0.0.3"
+version = "0.0.4"
 
 
 class Redash:
