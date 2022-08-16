@@ -5,7 +5,7 @@ from .base import BaseObject, BaseService
 from .mixins import CommonMixin, PublishMxin
 
 
-class QueriesService(CommonMixin, PublishMxin, BaseObject):
+class DataSourcesService(CommonMixin, PublishMxin, BaseObject):
     def __init__(self, base: BaseService) -> None:
 
         # init mixins
@@ -13,11 +13,11 @@ class QueriesService(CommonMixin, PublishMxin, BaseObject):
         PublishMxin.__init__(self, base)
 
         self.__base = base
-        self.endpoint = "/api/queries"
+        self.endpoint = "/api/data_sources"
 
     def get_id(self, name: str) -> Optional[int]:
         """Get the ID for a query by slug, or None if not found"""
-        matches = list(filter(lambda d: d.name == name, self.get_all().results))
+        matches = list(filter(lambda d: d.name == name, self.get_all()))
         if not matches:
             return None
         return matches.pop().id
