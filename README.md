@@ -73,12 +73,12 @@ redash_python
 ### Implemented Services
 
 - [x] Dashboards
-- [ ] Queries
+- [x] Queries
+- [x] Data Sources
 - [ ] Alerts
 - [ ] Users
 - [ ] Widgets
 - [ ] Visualizations
-- [ ] Data Sources
 
 for a full list of implemented methods in each service, print the service
 object.
