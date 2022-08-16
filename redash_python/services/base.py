@@ -1,11 +1,12 @@
 from types import SimpleNamespace
-from typing import Dict, Optional
+from typing import Dict, Optional, final
 
 import requests
 from redash_python.utils.json_encoder import ModelEncoder
 
 
 class BaseObject:
+    @final
     def __repr__(self) -> str:
         object_methods = [
             method_name
@@ -20,6 +21,7 @@ class BaseObject:
         ]
         return f"{self.__class__.__name__}(attributes: {object_attributes}, methods: {object_methods})"
 
+    @final
     def __str__(self) -> str:
         return self.__repr__()
 
@@ -35,6 +37,7 @@ class BaseService(BaseObject):
         self.__session.headers.update({"Authorization": f"Key {api_key}"})
         self.__encoder = ModelEncoder()
 
+    @final
     def _request(
         self,
         method: str,
@@ -55,16 +58,19 @@ class BaseService(BaseObject):
             raise e
         return response.json(object_hook=lambda d: SimpleNamespace(**d))
 
+    @final
     def post(self, endpoint: str, data: Dict, **kwargs) -> SimpleNamespace:
         """Perform a POST request to the endpoint with the given data"""
         return self._request("POST", endpoint, data, **kwargs)
 
+    @final
     def get(
         self, endpoint: str, data: Optional[Dict] = None, **kwargs
     ) -> SimpleNamespace:
         """Perform a GET request to the endpoint"""
         return self._request("GET", endpoint, data, **kwargs)
 
+    @final
     def delete(self, endpoint: str, **kwargs) -> SimpleNamespace:
         """Perform a DELETE request to the endpoint"""
         return self._request("DELETE", endpoint, **kwargs)
