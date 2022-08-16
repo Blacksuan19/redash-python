@@ -8,9 +8,9 @@ an API key is required in addition to the instance's host URL.
 
 ## Installation
 
-- Download latest `whl` file from
-  [releases page](https://github.com/blacksuan19/redash-python/releases).
-- install it with `pip install redash_python.whl`
+```bash
+pip install redash-python
+```
 
 ### Usage
 
