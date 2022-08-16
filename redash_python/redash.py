@@ -1,7 +1,11 @@
 from typing import List
 
-from redash_python.services.base import BaseService
-from redash_python.services.dashboards import DashboardsService
+from redash_python.services import (
+    BaseService,
+    DashboardsService,
+    DataSourcesService,
+    QueriesService,
+)
 
 
 class Redash:
@@ -24,10 +28,12 @@ class Redash:
 
         # Initialize services
         self.dashboards = DashboardsService(self.__base)
+        self.queries = QueriesService(self.__base)
+        self.data_sources = DataSourcesService(self.__base)
 
         # keep track of services
         attr_dict = self.__dict__
-        ignore_list = ["BaseService"]
+        ignore_list = ["_Redash__base", "__base"]
         self.services = [
             attr_dict[k].__class__.__name__
             for k in self.__dict__
