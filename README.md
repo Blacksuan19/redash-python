@@ -46,7 +46,8 @@ print(client.services)
 print(client.policies)
 ```
 
-for more usage examples checkout the [demo notebook](./demo.ipynb).
+for more usage examples checkout the
+[demo notebook](https://github.com/Blacksuan19/redash-python/blob/master/demo.ipynb).
 
 ## Development
 
@@ -66,7 +67,7 @@ redash_python
 ├── __init__.py
 ├── redash.py              # services wrapper
 ├── utils                  # exceptions, encoder, etc.
-└── services                # implemented services
+└── services               # implemented services
 
 ```
 
