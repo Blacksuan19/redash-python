@@ -35,8 +35,8 @@ class PublishMxin:
 
     def publish(self, dashboard_id: int) -> SimpleNamespace:
         """Publish a dashboard"""
-        return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"draft": False})
+        return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"is_draft": False})
 
     def unpublish(self, dashboard_id: int) -> SimpleNamespace:
         """Unpublish a dashboard"""
-        return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"draft": True})
+        return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"is_draft": True})
