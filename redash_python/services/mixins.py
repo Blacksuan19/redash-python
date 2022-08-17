@@ -1,5 +1,5 @@
 from types import SimpleNamespace
-from typing import Dict
+from typing import Dict, List
 
 from redash_python.services import BaseService
 
@@ -18,17 +18,25 @@ class CommonMixin:
         """fetch all objects."""
         return self.__base.get(self.endpoint)
 
-    def get_by_tag(self, tag: str, without: bool = False) -> SimpleNamespace:
-        """Get all objects with a tag or all objects without a tag"""
+    def get_by_tags(self, tags: List[str], without: bool = False) -> SimpleNamespace:
+        """Get all objects with `tags` or all objects without any of `tags`"""
         all_objects = self.get_all()
 
         if without:
             return SimpleNamespace(
-                results=[o for o in all_objects.results if tag not in o.tags]
+                results=[
+                    obj
+                    for obj in all_objects.results
+                    if not any(tag in obj.tags for tag in tags)
+                ]
             )
 
         return SimpleNamespace(
-            results=[o for o in all_objects.results if tag in o.tags]
+            results=[
+                obj
+                for obj in all_objects.results
+                if any(tag in obj.tags for tag in tags)
+            ]
         )
 
     def update(self, id: int, data: Dict) -> SimpleNamespace:
