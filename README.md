@@ -46,9 +46,6 @@ print(client.services)
 print(client.policies)
 ```
 
-for more usage examples checkout the
-[demo notebook](https://github.com/Blacksuan19/redash-python/blob/master/demo.ipynb).
-
 ## Development
 
 before starting development, install required packages in `requirements.txt`
