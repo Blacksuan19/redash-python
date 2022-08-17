@@ -18,9 +18,15 @@ class CommonMixin:
         """fetch all objects."""
         return self.__base.get(self.endpoint)
 
-    def get_by_tag(self, tag: str) -> SimpleNamespace:
-        """Get all objects with a tag"""
+    def get_by_tag(self, tag: str, without: bool = False) -> SimpleNamespace:
+        """Get all objects with a tag or all objects without a tag"""
         all_objects = self.get_all()
+
+        if without:
+            return SimpleNamespace(
+                results=[o for o in all_objects.results if tag not in o.tags]
+            )
+
         return SimpleNamespace(
             results=[o for o in all_objects.results if tag in o.tags]
         )
