@@ -1,5 +1,5 @@
 from .alerts import AlertsService
-from .base import BaseObject, BaseService
+from .base import BaseService
 from .dashboards import DashboardsService
 from .data_sources import DataSourcesService
 from .destinations import DestService

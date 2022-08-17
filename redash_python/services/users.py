@@ -1,8 +1,8 @@
-from .base import BaseObject, BaseService
-from .mixins import CommonMixin, NameMixin
+from .base import BaseService
+from .mixins import CommonMixin, NameMixin, PrintMixin
 
 
-class UsersService(CommonMixin, NameMixin, BaseObject):
+class UsersService(CommonMixin, NameMixin, PrintMixin):
     def __init__(self, base: BaseService) -> None:
 
         # init mixins
