@@ -42,7 +42,7 @@ class BaseService(BaseObject):
         self,
         method: str,
         endpoint: str,
-        data: Optional[Dict] = None,
+        data: Optional[SimpleNamespace] = None,
         **kwargs,
     ) -> SimpleNamespace:
         """Perform a request to the endpoint with the given data"""
@@ -59,13 +59,13 @@ class BaseService(BaseObject):
         return response.json(object_hook=lambda d: SimpleNamespace(**d))
 
     @final
-    def post(self, endpoint: str, data: Dict, **kwargs) -> SimpleNamespace:
+    def post(self, endpoint: str, data: SimpleNamespace, **kwargs) -> SimpleNamespace:
         """Perform a POST request to the endpoint with the given data"""
         return self._request("POST", endpoint, data, **kwargs)
 
     @final
     def get(
-        self, endpoint: str, data: Optional[Dict] = None, **kwargs
+        self, endpoint: str, data: Optional[SimpleNamespace] = None, **kwargs
     ) -> SimpleNamespace:
         """Perform a GET request to the endpoint"""
         return self._request("GET", endpoint, data, **kwargs)
