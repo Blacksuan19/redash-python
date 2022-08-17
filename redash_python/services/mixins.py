@@ -37,7 +37,7 @@ class NameMixin:
         return self.get(self.get_id(name))
 
     def get_id(self, name_or_slug: str) -> Optional[int]:
-        """Get the ID for an alert by name, or None if not found"""
+        """Get the ID for an object by name or slug, returns None if not found"""
         all_obj = self.get_all()
         if not all_obj.results:
             matches = list(filter(lambda d: d.slug == name_or_slug, all_obj))
@@ -81,11 +81,11 @@ class PublishMxin:
         self.__base = base
 
     def publish(self, dashboard_id: int) -> SimpleNamespace:
-        """Publish a dashboard"""
+        """Publish an object"""
         return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"is_draft": False})
 
     def unpublish(self, dashboard_id: int) -> SimpleNamespace:
-        """Unpublish a dashboard"""
+        """Unpublish an object"""
         return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"is_draft": True})
 
 
