@@ -23,7 +23,8 @@ dev = ["black", "bumpver", "pip-tools", "wheel"]
 
 [project.urls]
 Homepage = "https://github.com/blacksuan19/redash-python"
-repository = "https://github.com/blacksuan19/redash-python/issues"
+Repository = "https://github.com/blacksuan19/redash-python/"
+Issues = "https://github.com/blacksuan19/redash-python/issues"
 
 
 [tool.bumpver]
