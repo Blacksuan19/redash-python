@@ -8,3 +8,4 @@ jetfiles_python.egg-info
 .directory
 .vscode
 redash_python.egg-info
+*.ipynb
