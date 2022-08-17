@@ -76,6 +76,8 @@ redash_python
 - [x] Alerts
 - [x] Users
 - [x] Destinations
+- [ ] Groups
+- [ ] query_snippets
 
 for a full list of implemented methods in each service, print the service
 object.
