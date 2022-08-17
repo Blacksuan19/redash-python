@@ -1,10 +1,13 @@
 from typing import List
 
 from redash_python.services import (
+    AlertsService,
     BaseService,
     DashboardsService,
     DataSourcesService,
+    DestService,
     QueriesService,
+    UsersService,
 )
 
 version = "0.0.17"
@@ -33,10 +36,13 @@ class Redash:
         self.dashboards = DashboardsService(self.__base)
         self.queries = QueriesService(self.__base)
         self.data_sources = DataSourcesService(self.__base)
+        self.alerts = AlertsService(self.__base)
+        self.destinations = DestService(self.__base)
+        self.users = UsersService(self.__base)
 
         # keep track of services
         attr_dict = self.__dict__
-        ignore_list = ["_Redash__base", "__base"]
+        ignore_list = ["_Redash__base", "__base", "version"]
         self.services = [
             attr_dict[k].__class__.__name__
             for k in self.__dict__

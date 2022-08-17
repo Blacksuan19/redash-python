@@ -1,7 +1,7 @@
 from types import SimpleNamespace
-from typing import Dict, List
+from typing import List, Optional
 
-from redash_python.services import BaseService
+from .base import BaseService
 
 
 class CommonMixin:
@@ -17,6 +17,40 @@ class CommonMixin:
     def get_all(self) -> SimpleNamespace:
         """fetch all objects."""
         return self.__base.get(self.endpoint)
+
+    def update(self, id: int, data: SimpleNamespace) -> SimpleNamespace:
+        """Update by ID"""
+        return self.__base.post(f"{self.endpoint}/{id}", data)
+
+    def create(self, data: SimpleNamespace) -> SimpleNamespace:
+        """Create a new object with data"""
+        return self.__base.post(self.endpoint, data)
+
+    def delete(self, id: int) -> SimpleNamespace:
+        """Delete by ID"""
+        return self.__base.delete(f"{self.endpoint}/{id}")
+
+
+class NameMixin:
+    def get_by_name(self, name: str) -> SimpleNamespace:
+        """Get by name or slug"""
+        return self.get(self.get_id(name))
+
+    def get_id(self, name_or_slug: str) -> Optional[int]:
+        """Get the ID for an alert by name, or None if not found"""
+        all_obj = self.get_all()
+        if not all_obj.results:
+            matches = list(filter(lambda d: d.slug == name_or_slug, all_obj))
+        else:
+            matches = list(filter(lambda d: d.name == name_or_slug, all_obj.results))
+
+        if not matches:
+            return None
+        return matches.pop().id
+
+
+class TagsMixin:
+    """Mixin with methods for services with tags"""
 
     def get_by_tags(self, tags: List[str], without: bool = False) -> SimpleNamespace:
         """Get all objects with `tags` or all objects without any of `tags`"""
@@ -39,14 +73,6 @@ class CommonMixin:
             ]
         )
 
-    def update(self, id: int, data: Dict) -> SimpleNamespace:
-        """Update by ID"""
-        return self.__base.post(f"{self.endpoint}/{id}", data)
-
-    def delete(self, id: int) -> SimpleNamespace:
-        """Delete by ID"""
-        return self.__base.delete(f"{self.endpoint}/{id}")
-
 
 class PublishMxin:
     """Mixin for publishable objects"""
@@ -61,3 +87,18 @@ class PublishMxin:
     def unpublish(self, dashboard_id: int) -> SimpleNamespace:
         """Unpublish a dashboard"""
         return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"is_draft": True})
+
+
+class FavoriteMixin:
+    """Mixin for favoriteable objects"""
+
+    def __init__(self, base: BaseService) -> None:
+        self.__base = base
+
+    def favorite(self, id: int) -> SimpleNamespace:
+        """Favorite an object"""
+        return self.__base.post(f"{self.endpoint}/{id}/favorite", {})
+
+    def unfavorite(self, id: int) -> SimpleNamespace:
+        """Unfavorite an object"""
+        return self.__base.delete(f"{self.endpoint}/{id}/favorite")
