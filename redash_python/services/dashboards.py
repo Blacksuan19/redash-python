@@ -2,13 +2,16 @@ from types import SimpleNamespace
 from typing import Optional
 
 from .base import BaseObject, BaseService
-from .mixins import CommonMixin, PublishMxin
+from .mixins import CommonMixin, FavoriteMixin, NameMixin, PublishMxin, TagsMixin
 
 
-class DashboardsService(CommonMixin, PublishMxin, BaseObject):
+class DashboardsService(
+    FavoriteMixin, CommonMixin, TagsMixin, PublishMxin, NameMixin, BaseObject
+):
     def __init__(self, base: BaseService) -> None:
 
         # init mixins
+        FavoriteMixin.__init__(self, base)
         CommonMixin.__init__(self, base)
         PublishMxin.__init__(self, base)
 
@@ -19,21 +22,6 @@ class DashboardsService(CommonMixin, PublishMxin, BaseObject):
         """Get the slug for a dashboard by ID"""
         return self.get(dashboard_id).slug
 
-    def get_id(self, slug: str) -> Optional[int]:
-        """Get the ID for a dashboard by slug, or None if not found"""
-        matches = list(filter(lambda d: d.slug == slug, self.get_all().results))
-        if not matches:
-            return None
-        return matches.pop().id
-
-    def get_by_slug(self, slug: str) -> SimpleNamespace:
-        """Get a dashboard by slug"""
-        return self.get(self.get_id(slug))
-
-    def create(self, name: str) -> SimpleNamespace:
-        """Create a new dashboard"""
-        return self.__base.post(self.endpoint, {"name": name})
-
     def refresh(self, dashboard_id: int) -> None:
         """Refresh a dashboard"""
         widgets = self.get(dashboard_id).widgets
@@ -43,3 +31,28 @@ class DashboardsService(CommonMixin, PublishMxin, BaseObject):
                 continue
             query = widget.visualization.query
             self.__base.post(f"/api/queries/{query.id}/results", {"max_age": 0})
+
+    def create_widget(
+        self,
+        dashboard_id: int,
+        visualization_id: Optional[int],
+        options: SimpleNamespace,
+        text: str = "",
+    ) -> SimpleNamespace:
+        """
+        create new widget in given dashboard
+
+        Args:
+            dashboard_id: id of dashboard to create widget in
+            visualization_id: id of visualization to use for widget (pass None for text widget)
+            options: options to use for widget
+            text: text to use for text widget
+        """
+        data = SimpleNamespace(
+            dashboard_id=dashboard_id,
+            text=text,
+            options=options,
+            visualization_id=visualization_id,
+            width=1,
+        )
+        return self.__base.post("/api/widgets", data)
