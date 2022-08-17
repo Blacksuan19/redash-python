@@ -33,3 +33,13 @@ class DashboardsService(CommonMixin, PublishMxin, BaseObject):
     def create(self, name: str) -> SimpleNamespace:
         """Create a new dashboard"""
         return self.__base.post(self.endpoint, {"name": name})
+
+    def refresh(self, dashboard_id: int) -> None:
+        """Refresh a dashboard"""
+        widgets = self.get(dashboard_id).widgets
+
+        for widget in widgets:
+            if not hasattr(widget, "visualization"):
+                continue
+            query = widget.visualization.query
+            self.__base.post(f"/api/queries/{query.id}/results", {"max_age": 0})
