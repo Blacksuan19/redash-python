@@ -6,6 +6,8 @@ from redash_python.services import (
     DashboardsService,
     DataSourcesService,
     DestService,
+    GroupsService,
+    QSnipsService,
     QueriesService,
     UsersService,
 )
@@ -39,6 +41,8 @@ class Redash:
         self.alerts = AlertsService(self.__base)
         self.destinations = DestService(self.__base)
         self.users = UsersService(self.__base)
+        self.groups = GroupsService(self.__base)
+        self.query_snippets = QSnipsService(self.__base)
 
         # keep track of services
         attr_dict = self.__dict__
