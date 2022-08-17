@@ -18,6 +18,13 @@ class CommonMixin:
         """fetch all objects."""
         return self.__base.get(self.endpoint)
 
+    def get_by_tag(self, tag: str) -> SimpleNamespace:
+        """Get all objects with a tag"""
+        all_objects = self.get_all()
+        return SimpleNamespace(
+            results=[o for o in all_objects.results if tag in o.tags]
+        )
+
     def update(self, id: int, data: Dict) -> SimpleNamespace:
         """Update by ID"""
         return self.__base.post(f"{self.endpoint}/{id}", data)
