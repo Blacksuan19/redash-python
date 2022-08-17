@@ -1,12 +1,19 @@
 from types import SimpleNamespace
 from typing import Optional
 
-from .base import BaseObject, BaseService
-from .mixins import CommonMixin, FavoriteMixin, NameMixin, PublishMxin, TagsMixin
+from .base import BaseService
+from .mixins import (
+    CommonMixin,
+    FavoriteMixin,
+    NameMixin,
+    PrintMixin,
+    PublishMxin,
+    TagsMixin,
+)
 
 
 class DashboardsService(
-    FavoriteMixin, CommonMixin, TagsMixin, PublishMxin, NameMixin, BaseObject
+    FavoriteMixin, CommonMixin, TagsMixin, PublishMxin, NameMixin, PrintMixin
 ):
     def __init__(self, base: BaseService) -> None:
 
