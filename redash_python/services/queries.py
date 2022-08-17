@@ -29,3 +29,7 @@ class QueriesService(CommonMixin, PublishMxin, BaseObject):
     def create(self, query_data: Dict) -> SimpleNamespace:
         """Create a new query"""
         return self.__base.post(self.endpoint, query_data)
+
+    def refresh(self, query_id: int) -> SimpleNamespace:
+        """Refresh a query"""
+        return self.__base.post(f"{self.endpoint}/{query_id}/results", dict(max_age=0))
