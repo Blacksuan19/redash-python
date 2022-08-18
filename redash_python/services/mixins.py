@@ -1,5 +1,5 @@
 from types import SimpleNamespace
-from typing import List, Optional, final
+from typing import List, Optional, Union, final
 
 from .base import BaseService
 
@@ -53,6 +53,13 @@ class CommonMixin:
 
 
 class NameMixin:
+    def exists(self, name_or_id: Union[str, int]) -> bool:
+        """Check if an object with given `name_or_id` exists"""
+        if isinstance(name_or_id, int):
+            return not hasattr(self.get(name_or_id), "message")
+
+        return not hasattr(self.get_by_name(name_or_id), "message")
+
     def get_by_name(self, name: str) -> SimpleNamespace:
         """Get by name or slug"""
         return self.get(self.get_id(name))
