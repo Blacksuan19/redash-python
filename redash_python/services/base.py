@@ -30,12 +30,12 @@ class BaseService:
 
         if not isinstance(data, dict):
             data = self.__encoder.encode(data)
-        try:
-            response = self.__session.request(
-                method, url, json=data if data else None, **kwargs
-            )
-        except requests.exceptions.RequestException as e:
-            raise e
+
+        response = self.__session.request(
+            method, url, json=data if data else None, **kwargs
+        )
+
+        response.raise_for_status()
         return response.json(object_hook=lambda d: SimpleNamespace(**d))
 
     @final
