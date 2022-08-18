@@ -8,4 +8,18 @@ class UsersService(CommonMixin, NameMixin, PrintMixin):
         # init mixins
         CommonMixin.__init__(self, base)
 
+        self.__base = base
         self.endpoint = "/api/users"
+
+    def add_group(self, user_id: int, group_id: int) -> None:
+        """
+        add user to group
+        """
+
+        self.__base.post(f"/api/groups/{group_id}/members", {"user_id": user_id})
+
+    def remove_group(self, user_id: int, group_id: int) -> None:
+        """
+        remove user from group
+        """
+        self.__base.delete(f"/api/groups/{group_id}/members/{user_id}")
