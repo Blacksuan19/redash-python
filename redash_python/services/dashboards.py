@@ -40,7 +40,7 @@ class DashboardsService(
             self.__base.post(f"/api/queries/{query.id}/results", {"max_age": 0})
 
     def share(self, dashboard_id: int) -> str:
-        """Share a dashboard with a group"""
+        """get public url for dashboard"""
         response = self.__base.post(f"{self.endpoint}/{dashboard_id}/share", {})
         return response.public_url
 
