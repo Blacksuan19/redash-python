@@ -46,6 +46,7 @@ class DashboardsService(
 
     def create_widget(
         self,
+        *,
         dashboard_id: int,
         visualization_id: Optional[int],
         options: SimpleNamespace,
