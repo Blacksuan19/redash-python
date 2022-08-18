@@ -1,5 +1,7 @@
 from typing import List
 
+import requests
+
 from redash_python.services import (
     AlertsService,
     BaseService,
@@ -58,6 +60,14 @@ class Redash:
         self.get = self.__base.get
         self.post = self.__base.post
         self.delete = self.__base.delete
+
+    def test_credentials(self):
+        """Test whether current credentials are valid"""
+        try:
+            response = self.get("/api/session")
+            return True
+        except requests.exceptions.HTTPError:
+            return False
 
     def __dir__(self) -> List[str]:
         return self.services + ["get", "post", "put", "delete"]
