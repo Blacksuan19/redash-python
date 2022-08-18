@@ -27,3 +27,7 @@ class QueriesService(
     def refresh(self, query_id: int) -> SimpleNamespace:
         """Refresh a query"""
         return self.__base.post(f"{self.endpoint}/{query_id}/results", dict(max_age=0))
+
+    def fork(self, query_id: int) -> SimpleNamespace:
+        """Fork a query"""
+        return self.__base.post(f"{self.endpoint}/{query_id}/fork", {"id": "query_id"})
