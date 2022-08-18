@@ -53,12 +53,9 @@ class CommonMixin:
 
 
 class NameMixin:
-    def exists(self, name_or_id: Union[str, int]) -> bool:
+    def exists(self, name_or_slug: str) -> bool:
         """Check if an object with given `name_or_id` exists"""
-        if isinstance(name_or_id, int):
-            return not hasattr(self.get(name_or_id), "message")
-
-        return not hasattr(self.get_by_name(name_or_id), "message")
+        return self.get_id(name_or_slug) is not None
 
     def get_by_name(self, name: str) -> SimpleNamespace:
         """Get by name or slug"""
@@ -67,7 +64,7 @@ class NameMixin:
     def get_id(self, name_or_slug: str) -> Optional[int]:
         """Get the ID for an object by name or slug, returns None if not found"""
         all_obj = self.get_all()
-        if not all_obj.results:
+        if not hasattr(all_obj, "results"):
             matches = list(filter(lambda d: d.slug == name_or_slug, all_obj))
         else:
             matches = list(filter(lambda d: d.name == name_or_slug, all_obj.results))
