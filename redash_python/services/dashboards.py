@@ -44,6 +44,32 @@ class DashboardsService(
         response = self.__base.post(f"{self.endpoint}/{dashboard_id}/share", {})
         return response.public_url
 
+    def duplicate(
+        self, dashboard_id: int, new_name: Optional[str] = None
+    ) -> SimpleNamespace:
+        """Duplicate a dashboard and all its widgets with `new_name`"""
+        current = self.get(dashboard_id)
+
+        if new_name is None:
+            new_name = f"Copy of: {current.name}"
+
+        new_dash = self.create(new_name)
+
+        if current.tags:
+            self.update(new_dash.id, SimpleNamespace(tags=current.tags))
+
+        for widget in current.widgets:
+            visualization_id = None
+            if hasattr(widget, "visualization"):
+                visualization_id = widget.visualization.id
+
+            self.create_widget(
+                dashboard_id=new_dash.id,
+                visualization_id=visualization_id,
+                options=widget.options,
+                text=widget.text,
+            )
+
     def create_widget(
         self,
         *,
