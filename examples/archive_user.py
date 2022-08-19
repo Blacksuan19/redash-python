@@ -23,16 +23,16 @@ def clean(
     user_ques = rd.queries.get_by_tags(tags=admin_tags, without=True)
     user_dashs = rd.dashboards.get_by_tags(tags=admin_tags, without=True)
 
-    if not user_ques.results:
+    if not user_ques:
         print("No user Queries found!")
     else:
-        list(map(rd.queries.delete, [q.id for q in user_ques]))
+        list(map(rd.queries.delete, [q.get("id") for q in user_ques]))
         print("Archived all user queries")
 
-    if not user_dashs.results:
+    if not user_dashs:
         print("No user Dashboards found!")
     else:
-        list(map(rd.dashboards.delete, [d.id for d in user_dashs]))
+        list(map(rd.dashboards.delete, [d.get("id") for d in user_dashs]))
         print("Archived all user dashboards")
 
 
