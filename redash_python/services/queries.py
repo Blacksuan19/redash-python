@@ -39,7 +39,7 @@ class QueriesService(
         """Refresh a query"""
         return self.__base.post(f"{self.endpoint}/{query_id}/results", dict(max_age=0))
 
-    def fork(self, query_id: int, new_name: Optional[str]) -> Dict:
+    def fork(self, query_id: int, new_name: Optional[str] = None) -> Dict:
         """Fork a query with a new name if provided"""
         new_q = self.__base.post(f"{self.endpoint}/{query_id}/fork", {"id": query_id})
 
