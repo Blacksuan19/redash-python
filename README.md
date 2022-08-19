@@ -33,7 +33,7 @@ query = client.queries.get_by_name("my-dashboard")
 q = client.queries.get_by_tags(["my-tag"])
 
 # get without tags
-dash = client.dashboards.get_by_tagd(["my-tag"], without=True)
+dash = client.dashboards.get_by_tags(["my-tag"], without=True)
 
 # Duplicate query with a different table as source
 ques = redash.queries
