@@ -61,6 +61,7 @@ class QueriesService(
         self,
         *,
         query: Dict,
+        new_name: str = None,
         table_map: Dict[str, str],
         tags: List[str],
         publish: bool = True,
@@ -70,6 +71,7 @@ class QueriesService(
 
         Args:
             query(Dict): query data object
+            new_name(str): new query name (optional)
             table_map(Dict): mapping of old to new tables
             tags(List): tags to add to new query
             publish(bool): whether to publish the new query
@@ -85,11 +87,11 @@ class QueriesService(
             >>> }
             >>> tags = ["tag1", "tag2"]
             >>> new_query = queries.duplicate_query_table(
-            >>>     query=query, table_map=table_map, tags=tags, publish=True
+            >>>     query=query, table_map=table_map, tags=tags, publish=True, new_name="new_query_name"
             >>> )
         """
 
-        new_id = self.fork(query.get("id"), None).get("id")
+        new_id = self.fork(query.get("id"), new_name).get("id")
 
         # update query
         new_query = self.get(new_id)
