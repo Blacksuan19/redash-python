@@ -47,7 +47,7 @@ class DashboardsService(
             if not "visualization" in widget.keys():
                 continue
             query = widget.get("visualization").get("query")
-            self.__base.post(f"/api/queries/{query.id}/results", {"max_age": 0})
+            self.__base.post(f"/api/queries/{query.get('id')}/results", {"max_age": 0})
 
     def share(self, dashboard_id: int) -> str:
         """get public url for dashboard"""
