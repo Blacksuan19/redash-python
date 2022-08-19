@@ -26,7 +26,7 @@ class DashboardsService(
 
     def get_slug(self, dashboard_id: int) -> Optional[str]:
         """Get the slug for a dashboard by ID"""
-        return self.get(dashboard_id).slug
+        return self.get(dashboard_id).get("slug")
 
     def refresh(self, dashboard_id: int) -> None:
         """Refresh a dashboard"""
