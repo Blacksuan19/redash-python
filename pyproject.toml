@@ -19,7 +19,7 @@ dependencies = ["requests"]
 requires-python = ">=3.7"
 
 [project.optional-dependencies]
-dev = ["black", "bumpver", "pip-tools", "wheel"]
+dev = ["black", "bumpver", "pip-tools", "wheel", "requests"]
 
 [project.urls]
 Homepage = "https://github.com/blacksuan19/redash-python"

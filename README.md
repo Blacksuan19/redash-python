@@ -55,10 +55,10 @@ for more examples on usage, see examples folder on github.
 
 ## Development
 
-before starting development, install required packages in `requirements.txt`
+before starting development, install dev depndencies:
 
 ```bash
-pip install -r requirements.txt
+pip install redash-python[dev]
 ```
 
 ### Architecture
