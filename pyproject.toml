@@ -16,7 +16,7 @@ classifiers = [
 ]
 keywords = ["redash"]
 dependencies = ["requests"]
-requires-python = ">=3.9"
+requires-python = ">=3.7"
 
 [project.optional-dependencies]
 dev = ["black", "bumpver", "pip-tools", "wheel"]
