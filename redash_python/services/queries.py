@@ -30,4 +30,4 @@ class QueriesService(
 
     def fork(self, query_id: int) -> SimpleNamespace:
         """Fork a query"""
-        return self.__base.post(f"{self.endpoint}/{query_id}/fork", {"id": "query_id"})
+        return self.__base.post(f"{self.endpoint}/{query_id}/fork", {"id": query_id})
