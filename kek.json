@@ -1,0 +1,153 @@
+null
+{'id': 1
+}
+null
+{
+    "id": 236,
+    "latest_query_data_id": 209,
+    "name": "Customers Predicted to Cancel",
+    "description": "",
+    "query": "select\n  SYMBOL_NUMBER as \"Customer ID\",\n  renewal_premium as \"Cancellation Cost\"\nfrom\n  abubakaryagob_preds_20220322064723\nwhere\n  predicted_cancelled = 'Y'\norder by\n  renewal_premium desc",
+    "query_hash": "d04d3aa4320e482e35ba8c12783e2945",
+    "schedule": null,
+    "api_key": "oiOwbA4qSS0JsJEP3uJ9h9JKHU8BQt9AkAqRBeLI",
+    "is_archived": false,
+    "is_draft": true,
+    "updated_at": "2022-08-19T06:11:06.999Z",
+    "created_at": "2022-08-19T06:11:06.999Z",
+    "data_source_id": 1,
+    "options": {
+        "parameters": [],
+        "apply_auto_limit": false
+    },
+    "version": 1,
+    "tags": [
+        "admin",
+        "test"
+    ],
+    "is_safe": true,
+    "user": {
+        "id": 1,
+        "name": "Abubakar Yagoub",
+        "email": "abubakaryagob@gmail.com",
+        "profile_image_url": "https://www.gravatar.com/avatar/61064d1b87b8601d5a5b621ac1e83443?s=40&d=identicon",
+        "groups": [
+            1,
+            2
+        ],
+        "updated_at": "2022-08-19T06:11:06.999Z",
+        "created_at": "2022-05-10T03:36:01.945Z",
+        "disabled_at": null,
+        "is_disabled": false,
+        "active_at": "2022-08-19T06:10:25Z",
+        "is_invitation_pending": false,
+        "is_email_verified": true,
+        "auth_type": "password"
+    },
+    "last_modified_by": {
+        "id": 1,
+        "name": "Abubakar Yagoub",
+        "email": "abubakaryagob@gmail.com",
+        "profile_image_url": "https://www.gravatar.com/avatar/61064d1b87b8601d5a5b621ac1e83443?s=40&d=identicon",
+        "groups": [
+            1,
+            2
+        ],
+        "updated_at": "2022-08-19T06:11:06.999Z",
+        "created_at": "2022-05-10T03:36:01.945Z",
+        "disabled_at": null,
+        "is_disabled": false,
+        "active_at": "2022-08-19T06:10:25Z",
+        "is_invitation_pending": false,
+        "is_email_verified": true,
+        "auth_type": "password"
+    },
+    "visualizations": [
+        {
+            "id": 647,
+            "type": "TABLE",
+            "name": "Table",
+            "description": "",
+            "options": {
+                "itemsPerPage": 25,
+                "columns": [
+                    {
+                        "booleanValues": [
+                            "false",
+                            "true"
+                        ],
+                        "imageUrlTemplate": "{{ @ }}",
+                        "imageTitleTemplate": "{{ @ }}",
+                        "imageWidth": "",
+                        "imageHeight": "",
+                        "linkUrlTemplate": "{{ @ }}",
+                        "linkTextTemplate": "{{ @ }}",
+                        "linkTitleTemplate": "{{ @ }}",
+                        "linkOpenInNewTab": true,
+                        "name": "Customer ID",
+                        "type": "string",
+                        "displayAs": "string",
+                        "visible": true,
+                        "order": 100000,
+                        "title": "Customer ID",
+                        "allowSearch": true,
+                        "alignContent": "left",
+                        "allowHTML": true,
+                        "highlightLinks": true,
+                        "description": "IDs of customers predicted to cancel by the model"
+                    },
+                    {
+                        "numberFormat": "0,0.00",
+                        "booleanValues": [
+                            "false",
+                            "true"
+                        ],
+                        "imageUrlTemplate": "{{ @ }}",
+                        "imageTitleTemplate": "{{ @ }}",
+                        "imageWidth": "",
+                        "imageHeight": "",
+                        "linkUrlTemplate": "{{ @ }}",
+                        "linkTextTemplate": "{{ @ }}",
+                        "linkTitleTemplate": "{{ @ }}",
+                        "linkOpenInNewTab": true,
+                        "name": "Cancellation Cost",
+                        "type": "float",
+                        "displayAs": "number",
+                        "visible": true,
+                        "order": 100001,
+                        "title": "Cancellation Cost",
+                        "allowSearch": false,
+                        "alignContent": "right",
+                        "allowHTML": true,
+                        "highlightLinks": false,
+                        "description": "Renewal Premium amount for customer"
+                    }
+                ]
+            },
+            "updated_at": "2022-08-19T06:11:06.999Z",
+            "created_at": "2022-08-19T06:11:06.999Z"
+        },
+        {
+            "id": 648,
+            "type": "WORD_CLOUD",
+            "name": "Which Customers have the highest cancellation cost?",
+            "description": "",
+            "options": {
+                "column": "Customer ID",
+                "frequenciesColumn": "Cancellation Cost",
+                "wordLengthLimit": {
+                    "min": null,
+                    "max": null
+                },
+                "wordCountLimit": {
+                    "min": null,
+                    "max": null
+                }
+            },
+            "updated_at": "2022-08-19T06:11:06.999Z",
+            "created_at": "2022-08-19T06:11:06.999Z"
+        }
+    ],
+    "is_favorite": false,
+    "can_edit": true
+}
