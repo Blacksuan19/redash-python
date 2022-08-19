@@ -1,4 +1,4 @@
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 from .base import BaseService
 from .mixins import (
@@ -39,9 +39,15 @@ class QueriesService(
         """Refresh a query"""
         return self.__base.post(f"{self.endpoint}/{query_id}/results", dict(max_age=0))
 
-    def fork(self, query_id: int) -> Dict:
+    def fork(self, query_id: int, new_name: Optional[str]) -> Dict:
         """Fork a query"""
-        return self.__base.post(f"{self.endpoint}/{query_id}/fork", {"id": query_id})
+        new_q = self.__base.post(f"{self.endpoint}/{query_id}/fork", {"id": query_id})
+
+        if not new_name:
+            return new_q
+
+        new_q["name"] = new_name
+        return self.update(new_q["id"], new_q)
 
     def scheduled(self) -> List[Dict]:
         """Get all scheduled queries"""
