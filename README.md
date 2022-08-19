@@ -17,26 +17,26 @@ pip install redash-python
 ```python
 from redash_python import Redash
 
-client = Redash(base_url="", api_key="")
+rd = Redash(base_url="", api_key="")
 
 
 # get all dashboards
-dashboards = client.dashboards.get_all()
+dashboards = rd.dashboards.get_all()
 
 # get specific dashboards by id
-dash = client.dashboards.get(1)
+dash = rd.dashboards.get(1)
 
 # get by slug or name
-query = client.queries.get_by_name("my-dashboard")
+query = rd.queries.get_by_name("my-dashboard")
 
 # get by tags
-q = client.queries.get_by_tags(["my-tag"])
+q = rd.queries.get_by_tags(["my-tag"])
 
 # get without tags
-dash = client.dashboards.get_by_tags(["my-tag"], without=True)
+dash = rd.dashboards.get_by_tags(["my-tag"], without=True)
 
 # Duplicate query with a different table as source
-ques = redash.queries
+ques = rd.queries
 ques.duplicate_query_table(
     query=ques.get(1),
     table_map={"old_table": "new_table"},
@@ -96,5 +96,5 @@ object.
 ```python
 
 >>> print(client.dashboards)
-DashboardsService(methods: ['archive', 'create', 'get', 'get_all', 'get_by_slug', 'get_id', 'get_slug', 'publish', 'unarchive', 'unpublish', 'update'])
+DashboardsService(attributes: ['endpoint'], methods: ['create', 'create_widget', 'delete', 'duplicate', 'exists', 'favorite', 'favorited', 'get', 'get_all', 'get_by_name', 'get_by_tags', 'get_id', 'get_slug', 'paginate', 'publish', 'refresh', 'share', 'unfavorite', 'unpublish', 'update'])
 ```
