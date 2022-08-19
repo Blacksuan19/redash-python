@@ -53,6 +53,10 @@ class QueriesService(
         """Get all scheduled queries"""
         return list(filter(lambda q: q.get("schedule"), self.get_all()))
 
+    def update_visualization(self, vis_id: int, data: Dict) -> Dict:
+        """Update a visualization with `data`"""
+        return self.__base.post(f"/api/visualizations/{vis_id}", data)
+
     def duplicate_query_table(
         self,
         *,
