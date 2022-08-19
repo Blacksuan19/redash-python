@@ -41,7 +41,7 @@ class DashboardsService(
     def share(self, dashboard_id: int) -> str:
         """get public url for dashboard"""
         response = self.__base.post(f"{self.endpoint}/{dashboard_id}/share", {})
-        return response.public_url
+        return response.get("public_url")
 
     def duplicate(self, dashboard_id: int, new_name: Optional[str] = None) -> Dict:
         """Duplicate a dashboard and all its widgets with `new_name`"""
