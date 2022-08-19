@@ -71,6 +71,8 @@ class NameMixin:
             if obj.get("name") == name_or_slug or obj.get("slug") == name_or_slug:
                 return obj.get("id")
 
+        return None
+
 
 class TagsMixin:
     """Mixin with methods for services with tags"""
@@ -88,12 +90,12 @@ class TagsMixin:
                 for obj in all_objects
                 if not any(tag in obj.get("tags", []) for tag in tags)
             ]
-        else:
-            return [
-                obj
-                for obj in all_objects
-                if any(tag in obj.get("tags", []) for tag in tags)
-            ]
+
+        return [
+            obj
+            for obj in all_objects
+            if any(tag in obj.get("tags", []) for tag in tags)
+        ]
 
 
 class PublishMxin:
