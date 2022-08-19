@@ -89,7 +89,7 @@ class QueriesService(
             >>> )
         """
 
-        new_id = self.fork(query.get("id")).get("id")
+        new_id = self.fork(query.get("id"), None).get("id")
 
         # update query
         new_query = self.get(new_id)
