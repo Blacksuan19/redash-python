@@ -45,10 +45,10 @@ ques.duplicate_query_table(
 )
 
 # get a list of implemented API endpoints
-print(client.services)
+print(rd.services)
 
 # get a list of implemented endpoints in a service
-print(client.policies)
+print(rd.users)
 ```
 
 for more examples on usage, see examples folder on github.
