@@ -15,7 +15,8 @@ class BaseService:
         # configure session
         self.__session = requests.Session()
         self.__session.headers.update({"Authorization": f"Key {api_key}"})
-        self.__encoder = ModelEncoder()
+        self.__session.headers.update({"Content-Type": "application/json"})
+        self.__session.headers.update({"Accept": "application/json"})
 
     @final
     def _request(
