@@ -8,7 +8,7 @@ app = Typer(
 )
 
 
-@app.command()
+@app.command(no_args_is_help=True)
 def clean(
     host_url: str = Argument(None, envvar="REDASH_HOST", help="Redash host"),
     api_key: str = Argument(None, envvar="REDASH_API_KEY", help="Redash api key"),
