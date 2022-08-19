@@ -1,5 +1,4 @@
-from types import SimpleNamespace
-from typing import Optional
+from typing import Dict, Optional
 
 from .base import BaseService
 from .mixins import (
@@ -44,30 +43,28 @@ class DashboardsService(
         response = self.__base.post(f"{self.endpoint}/{dashboard_id}/share", {})
         return response.public_url
 
-    def duplicate(
-        self, dashboard_id: int, new_name: Optional[str] = None
-    ) -> SimpleNamespace:
+    def duplicate(self, dashboard_id: int, new_name: Optional[str] = None) -> Dict:
         """Duplicate a dashboard and all its widgets with `new_name`"""
         current = self.get(dashboard_id)
 
         if new_name is None:
             new_name = f"Copy of: {current.name}"
 
-        new_dash = self.create(new_name)
+        new_dash = self.create({"name": new_name})
 
-        if current.tags:
-            self.update(new_dash.id, SimpleNamespace(tags=current.tags))
+        if current.get("tags") is not None:
+            self.update(new_dash.get("id"), {"tags": current.get("tags")})
 
-        for widget in current.widgets:
+        for widget in current.get("widgets"):
             visualization_id = None
-            if hasattr(widget, "visualization"):
-                visualization_id = widget.visualization.id
+            if "visualization" in widget.keys():
+                visualization_id = widget.get("visualization").get("id")
 
             self.create_widget(
-                dashboard_id=new_dash.id,
+                dashboard_id=new_dash.get("id"),
                 visualization_id=visualization_id,
-                options=widget.options,
-                text=widget.text,
+                options=widget.get("options"),
+                text=widget.get("text"),
             )
 
     def create_widget(
@@ -75,9 +72,9 @@ class DashboardsService(
         *,
         dashboard_id: int,
         visualization_id: Optional[int],
-        options: SimpleNamespace,
+        options: Dict,
         text: str = "",
-    ) -> SimpleNamespace:
+    ) -> Dict:
         """
         create new widget in given dashboard
 
@@ -87,7 +84,7 @@ class DashboardsService(
             options: options to use for widget
             text: text to use for text widget
         """
-        data = SimpleNamespace(
+        data = dict(
             dashboard_id=dashboard_id,
             text=text,
             options=options,

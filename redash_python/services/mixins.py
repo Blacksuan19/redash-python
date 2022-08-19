@@ -1,5 +1,4 @@
-from types import SimpleNamespace
-from typing import List, Optional, Union, final
+from typing import Dict, List, Optional, final
 
 from .base import BaseService
 
@@ -31,23 +30,23 @@ class CommonMixin:
     def __init__(self, base: BaseService) -> None:
         self.__base = base
 
-    def get(self, id: int) -> SimpleNamespace:
+    def get(self, id: int) -> Dict:
         """Fetch one by ID"""
         return self.__base.get(f"{self.endpoint}/{id}")
 
-    def get_all(self) -> SimpleNamespace:
+    def get_all(self) -> Dict:
         """fetch all objects."""
         return self.__base.get(self.endpoint)
 
-    def update(self, id: int, data: SimpleNamespace) -> SimpleNamespace:
+    def update(self, id: int, data: Dict) -> Dict:
         """Update by ID"""
         return self.__base.post(f"{self.endpoint}/{id}", data)
 
-    def create(self, data: SimpleNamespace) -> SimpleNamespace:
+    def create(self, data: Dict) -> Dict:
         """Create a new object with data"""
         return self.__base.post(self.endpoint, data)
 
-    def delete(self, id: int) -> SimpleNamespace:
+    def delete(self, id: int) -> Dict:
         """Delete by ID"""
         return self.__base.delete(f"{self.endpoint}/{id}")
 
@@ -57,46 +56,44 @@ class NameMixin:
         """Check if an object with given `name_or_id` exists"""
         return self.get_id(name_or_slug) is not None
 
-    def get_by_name(self, name: str) -> SimpleNamespace:
+    def get_by_name(self, name: str) -> Dict:
         """Get by name or slug"""
         return self.get(self.get_id(name))
 
     def get_id(self, name_or_slug: str) -> Optional[int]:
         """Get the ID for an object by name or slug, returns None if not found"""
-        all_obj = self.get_all()
-        if not hasattr(all_obj, "results"):
-            matches = list(filter(lambda d: d.slug == name_or_slug, all_obj))
-        else:
-            matches = list(filter(lambda d: d.name == name_or_slug, all_obj.results))
+        all_obj: List[Dict] = self.get_all()
 
-        if not matches:
-            return None
-        return matches.pop().id
+        if "results" in all_obj:
+            all_obj = all_obj["results"]
+
+        for obj in all_obj:
+            if obj.get("name") == name_or_slug or obj.get("slug") == name_or_slug:
+                return obj.get("id")
 
 
 class TagsMixin:
     """Mixin with methods for services with tags"""
 
-    def get_by_tags(self, tags: List[str], without: bool = False) -> SimpleNamespace:
+    def get_by_tags(self, tags: List[str], without: bool = False) -> List[Dict]:
         """Get all objects with `tags` or all objects without any of `tags`"""
         all_objects = self.get_all()
 
-        if without:
-            return SimpleNamespace(
-                results=[
-                    obj
-                    for obj in all_objects.results
-                    if not any(tag in obj.tags for tag in tags)
-                ]
-            )
+        if "results" in all_objects:
+            all_objects = all_objects["results"]
 
-        return SimpleNamespace(
-            results=[
+        if without:
+            return [
                 obj
-                for obj in all_objects.results
-                if any(tag in obj.tags for tag in tags)
+                for obj in all_objects
+                if not any(tag in obj.get("tags", []) for tag in tags)
             ]
-        )
+        else:
+            return [
+                obj
+                for obj in all_objects
+                if any(tag in obj.get("tags", []) for tag in tags)
+            ]
 
 
 class PublishMxin:
@@ -105,11 +102,11 @@ class PublishMxin:
     def __init__(self, base: BaseService) -> None:
         self.__base = base
 
-    def publish(self, dashboard_id: int) -> SimpleNamespace:
+    def publish(self, dashboard_id: int) -> Dict:
         """Publish an object"""
         return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"is_draft": False})
 
-    def unpublish(self, dashboard_id: int) -> SimpleNamespace:
+    def unpublish(self, dashboard_id: int) -> Dict:
         """Unpublish an object"""
         return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"is_draft": True})
 
@@ -120,10 +117,10 @@ class FavoriteMixin:
     def __init__(self, base: BaseService) -> None:
         self.__base = base
 
-    def favorite(self, id: int) -> SimpleNamespace:
+    def favorite(self, id: int) -> Dict:
         """Favorite an object"""
         return self.__base.post(f"{self.endpoint}/{id}/favorite", {})
 
-    def unfavorite(self, id: int) -> SimpleNamespace:
+    def unfavorite(self, id: int) -> Dict:
         """Unfavorite an object"""
         return self.__base.delete(f"{self.endpoint}/{id}/favorite")
