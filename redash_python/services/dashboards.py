@@ -30,12 +30,12 @@ class DashboardsService(
 
     def refresh(self, dashboard_id: int) -> None:
         """Refresh a dashboard"""
-        widgets = self.get(dashboard_id).widgets
+        widgets = self.get(dashboard_id).get("widgets")
 
         for widget in widgets:
-            if not hasattr(widget, "visualization"):
+            if not "visualization" in widget.keys():
                 continue
-            query = widget.visualization.query
+            query = widget.get("visualization").get("query")
             self.__base.post(f"/api/queries/{query.id}/results", {"max_age": 0})
 
     def share(self, dashboard_id: int) -> str:
@@ -48,7 +48,7 @@ class DashboardsService(
         current = self.get(dashboard_id)
 
         if new_name is None:
-            new_name = f"Copy of: {current.name}"
+            new_name = f"Copy of: {current.get('name')}"
 
         new_dash = self.create({"name": new_name})
 
