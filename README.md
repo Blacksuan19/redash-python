@@ -86,7 +86,7 @@ redash_python
 
 ### Meta features
 
-- [ ] pagination
+- [x] pagination
 - [x] Duplicate dashboards
 - [x] Duplicate query with a different source table from same data source
 

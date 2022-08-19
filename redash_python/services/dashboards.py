@@ -1,10 +1,11 @@
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 from .base import BaseService
 from .mixins import (
     CommonMixin,
     FavoriteMixin,
     NameMixin,
+    PaginationMixin,
     PrintMixin,
     PublishMxin,
     TagsMixin,
@@ -12,7 +13,13 @@ from .mixins import (
 
 
 class DashboardsService(
-    FavoriteMixin, CommonMixin, TagsMixin, PublishMxin, NameMixin, PrintMixin
+    FavoriteMixin,
+    CommonMixin,
+    TagsMixin,
+    PublishMxin,
+    NameMixin,
+    PrintMixin,
+    PaginationMixin,
 ):
     def __init__(self, base: BaseService) -> None:
 
@@ -20,9 +27,13 @@ class DashboardsService(
         FavoriteMixin.__init__(self, base)
         CommonMixin.__init__(self, base)
         PublishMxin.__init__(self, base)
+        PaginationMixin.__init__(self, base)
 
         self.__base = base
         self.endpoint = "/api/dashboards"
+
+    def get_all(self) -> List[Dict]:
+        return self.paginate()
 
     def get_slug(self, dashboard_id: int) -> Optional[str]:
         """Get the slug for a dashboard by ID"""

@@ -130,3 +130,23 @@ class FavoriteMixin:
     def unfavorite(self, id: int) -> Dict:
         """Unfavorite an object"""
         return self.__base.delete(f"{self.endpoint}/{id}/favorite")
+
+
+class PaginationMixin:
+    def __init__(self, base: BaseService) -> None:
+        self.__base = base
+
+    def paginate(self, page: int = 1, page_size: int = 100, **kwargs) -> List[Dict]:
+        """Load all items of a paginated resource"""
+        response = self.__base.get(
+            self.endpoint, {"page": page, "page_size": page_size}, **kwargs
+        )
+        items = response.get("results")
+        if response.get("page") * response.get("page_size") >= response.get("count"):
+            return items
+
+        else:
+            return [
+                *items,
+                *self.paginate(page + 1, page_size, **kwargs),
+            ]

@@ -5,6 +5,7 @@ from .mixins import (
     CommonMixin,
     FavoriteMixin,
     NameMixin,
+    PaginationMixin,
     PrintMixin,
     PublishMxin,
     TagsMixin,
@@ -12,7 +13,13 @@ from .mixins import (
 
 
 class QueriesService(
-    FavoriteMixin, CommonMixin, TagsMixin, PublishMxin, NameMixin, PrintMixin
+    FavoriteMixin,
+    CommonMixin,
+    TagsMixin,
+    PublishMxin,
+    NameMixin,
+    PrintMixin,
+    PaginationMixin,
 ):
     def __init__(self, base: BaseService) -> None:
 
@@ -20,9 +27,13 @@ class QueriesService(
         FavoriteMixin.__init__(self, base)
         CommonMixin.__init__(self, base)
         PublishMxin.__init__(self, base)
+        PaginationMixin.__init__(self, base)
 
         self.__base = base
         self.endpoint = "/api/queries"
+
+    def get_all(self) -> List[Dict]:
+        return self.paginate()
 
     def refresh(self, query_id: int) -> Dict:
         """Refresh a query"""
@@ -31,6 +42,10 @@ class QueriesService(
     def fork(self, query_id: int) -> Dict:
         """Fork a query"""
         return self.__base.post(f"{self.endpoint}/{query_id}/fork", {"id": query_id})
+
+    def scheduled(self) -> List[Dict]:
+        """Get all scheduled queries"""
+        return list(filter(lambda q: q.get("schedule"), self.get_all()))
 
     def duplicate_query_table(
         self,
