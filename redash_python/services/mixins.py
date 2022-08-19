@@ -119,6 +119,10 @@ class FavoriteMixin:
     def __init__(self, base: BaseService) -> None:
         self.__base = base
 
+    def favorited(self) -> List[Dict]:
+        """Get all favorited objects"""
+        return list(filter(lambda x: x["is_favorite"], self.get_all()))
+
     def favorite(self, id: int) -> Dict:
         """Favorite an object"""
         return self.__base.post(f"{self.endpoint}/{id}/favorite", {})
