@@ -14,10 +14,6 @@ pip install redash-python
 
 ### Usage
 
-the API uses SimpleNameSpace objects to represent resources instead of
-dictionaries. this allows access to the resource's attributes using dot
-notation.
-
 ```python
 from redash_python import Redash
 
@@ -25,19 +21,28 @@ client = Redash(base_url="", api_key="")
 
 
 # get all dashboards
-dashboards = client.dashboards.get_all().results
+dashboards = client.dashboards.get_all()
 
 # get specific dashboards by id
 dash = client.dashboards.get(1)
 
-# get by slug
-dash = client.dashboards.get_by_slug("my-dashboard")
+# get by slug or name
+query = client.queries.get_by_name("my-dashboard")
 
-# print slug
-print(dash.slug)
+# get by tags
+q = client.queries.get_by_tags(["my-tag"])
 
-# get dashboard widgets
-print(dash.widgets)
+# get without tags
+dash = client.dashboards.get_by_tagd(["my-tag"], without=True)
+
+# Duplicate query with a different table as source
+ques = redash.queries
+ques.duplicate_query_table(
+    query=ques.get(1),
+    table_map={"old_table": "new_table"},
+    tags=["admin", "test"],
+    publish=True,
+)
 
 # get a list of implemented API endpoints
 print(client.services)
@@ -62,10 +67,10 @@ endpoint group to its own service, on top of which is the `Redash` class.
 ```bash
 redash_python
 ├── __init__.py
-├── redash.py              # services wrapper
-├── utils                  # exceptions, encoder, etc.
-└── services               # implemented services
-
+├── redash.py               # Services wrapper
+└── services                # implemented services
+    ├── base.py             # Base service class
+    └── mixins.py           # Mixins for services with shared functionality
 ```
 
 ### Implemented Services
@@ -78,6 +83,12 @@ redash_python
 - [x] Destinations
 - [x] Groups
 - [x] query_snippets
+
+### Meta features
+
+- [ ] pagination
+- [x] Duplicate dashboards
+- [x] Duplicate query with a different source table from same data source
 
 for a full list of implemented methods in each service, print the service
 object.
