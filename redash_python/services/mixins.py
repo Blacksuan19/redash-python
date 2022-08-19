@@ -34,7 +34,7 @@ class CommonMixin:
         """Fetch one by ID"""
         return self.__base.get(f"{self.endpoint}/{id}")
 
-    def get_all(self) -> Dict:
+    def get_all(self) -> List[Dict]:
         """fetch all objects."""
         return self.__base.get(self.endpoint)
 
