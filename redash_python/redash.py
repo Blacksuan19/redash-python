@@ -27,8 +27,8 @@ class Redash:
 
     Usage:
         >>> from redash_python import Redash
-        >>> redash = Redash("https://redash.example.com", "API_KEY")
-        >>> redash.dashboards.get_all()
+        >>> rd = Redash("https://redash.example.com", "API_KEY")
+        >>> rd.dashboards.get_all()
     """
 
     def __init__(self, base_url: str, api_key: str) -> None:
@@ -70,7 +70,7 @@ class Redash:
             return False
 
     def __dir__(self) -> List[str]:
-        return self.services + ["get", "post", "put", "delete"]
+        return self.services + ["get", "post", "delete"]
 
     def __repr__(self) -> str:
         return f"Redash(base_url: {self.__base.base_url}, services: {self.services})"
