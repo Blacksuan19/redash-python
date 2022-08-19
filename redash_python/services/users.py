@@ -21,7 +21,6 @@ class UsersService(CommonMixin, NameMixin, PrintMixin):
         """
         add user to group
         """
-
         self.__base.post(f"/api/groups/{group_id}/members", {"user_id": user_id})
 
     def remove_group(self, user_id: int, group_id: int) -> None:

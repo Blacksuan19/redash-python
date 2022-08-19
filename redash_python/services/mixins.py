@@ -4,6 +4,8 @@ from .base import BaseService
 
 
 class PrintMixin:
+    """Mixin class for printing data"""
+
     @final
     def __repr__(self) -> str:
         object_methods = [
@@ -52,13 +54,15 @@ class CommonMixin:
 
 
 class NameMixin:
+    """Mixin for nameable services (by name or slug)."""
+
     def exists(self, name_or_slug: str) -> bool:
-        """Check if an object with given `name_or_id` exists"""
+        """Check if an object with given `name_or_slug` exists"""
         return self.get_id(name_or_slug) is not None
 
-    def get_by_name(self, name: str) -> Dict:
+    def get_by_name(self, name_or_slug: str) -> Dict:
         """Get by name or slug"""
-        return self.get(self.get_id(name))
+        return self.get(self.get_id(name_or_slug))
 
     def get_id(self, name_or_slug: str) -> Optional[int]:
         """Get the ID for an object by name or slug, returns None if not found"""
@@ -75,7 +79,7 @@ class NameMixin:
 
 
 class TagsMixin:
-    """Mixin with methods for services with tags"""
+    """Mixin for taggable services"""
 
     def get_by_tags(self, tags: List[str], without: bool = False) -> List[Dict]:
         """Get all objects with `tags` or all objects without any of `tags`"""
@@ -99,7 +103,7 @@ class TagsMixin:
 
 
 class PublishMxin:
-    """Mixin for publishable objects"""
+    """Mixin for publishable services"""
 
     def __init__(self, base: BaseService) -> None:
         self.__base = base
@@ -114,7 +118,7 @@ class PublishMxin:
 
 
 class FavoriteMixin:
-    """Mixin for favoriteable objects"""
+    """Mixin for favoriteable services"""
 
     def __init__(self, base: BaseService) -> None:
         self.__base = base
@@ -133,6 +137,8 @@ class FavoriteMixin:
 
 
 class PaginationMixin:
+    """Mixin for paginated services"""
+
     def __init__(self, base: BaseService) -> None:
         self.__base = base
 
