@@ -22,7 +22,7 @@ class BaseService:
         endpoint: str,
         data: Optional[Dict] = None,
         **kwargs,
-    ) -> Dict:
+    ) -> requests.Response:
         """Perform a request to the endpoint with the given data"""
         url = self.base_url + endpoint
         response = self.__session.request(
@@ -32,19 +32,19 @@ class BaseService:
             **kwargs,
         )
         response.raise_for_status()
-        return response.json()
+        return response
 
     @final
     def post(self, endpoint: str, data: Dict, **kwargs) -> Dict:
         """Perform a POST request to the endpoint with the given data"""
-        return self._request("POST", endpoint, data, **kwargs)
+        return self._request("POST", endpoint, data, **kwargs).json()
 
     @final
     def get(self, endpoint: str, data: Optional[Dict] = None, **kwargs) -> Dict:
         """Perform a GET request to the endpoint"""
-        return self._request("GET", endpoint, data, **kwargs)
+        return self._request("GET", endpoint, data, **kwargs).json()
 
     @final
-    def delete(self, endpoint: str, **kwargs) -> Dict:
+    def delete(self, endpoint: str, **kwargs) -> None:
         """Perform a DELETE request to the endpoint"""
         return self._request("DELETE", endpoint, **kwargs)

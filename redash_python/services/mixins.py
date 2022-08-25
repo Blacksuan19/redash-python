@@ -48,7 +48,7 @@ class CommonMixin:
         """Create a new object with data"""
         return self.__base.post(self.endpoint, data)
 
-    def delete(self, id: int) -> Dict:
+    def delete(self, id: int) -> None:
         """Delete by ID"""
         return self.__base.delete(f"{self.endpoint}/{id}")
 
