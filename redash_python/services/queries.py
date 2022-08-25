@@ -101,7 +101,6 @@ class QueriesService(
 
         # update query
         new_query = self.get(new_id)
-        new_query["name"] = query.get("name")
         new_query["tags"] = tags
         new_query["data_source_id"] = (
             new_data_source_id if new_data_source_id else query.get("data_source_id")
