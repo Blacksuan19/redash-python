@@ -64,6 +64,7 @@ class QueriesService(
         new_name: str = None,
         table_map: Dict[str, str],
         tags: List[str],
+        new_data_source_id: Optional[int] = None,
         publish: bool = True,
     ) -> Dict:
         """
@@ -74,6 +75,7 @@ class QueriesService(
             new_name(str): new query name (optional)
             table_map(Dict): mapping of old to new tables
             tags(List): tags to add to new query
+            new_data_source_id(int): new data source id (optional)
             publish(bool): whether to publish the new query
 
         Returns:
@@ -87,7 +89,11 @@ class QueriesService(
             >>> }
             >>> tags = ["tag1", "tag2"]
             >>> new_query = queries.duplicate_query_table(
-            >>>     query=query, table_map=table_map, tags=tags, publish=True, new_name="new_query_name"
+            >>>     query=query,
+            >>>     new_name="new_query_name",
+            >>>     table_map=table_map,
+            >>>     new_data_source_id=rd.data_sources.get_by_name("new_data_source").id,
+            >>>     tags=tags,
             >>> )
         """
 
@@ -97,6 +103,9 @@ class QueriesService(
         new_query = self.get(new_id)
         new_query["name"] = query.get("name")
         new_query["tags"] = tags
+        new_query["data_source_id"] = (
+            new_data_source_id if new_data_source_id else query.get("data_source_id")
+        )
 
         for old, new in list(table_map.items()):
             new_query["query"] = new_query.get("query").replace(old, new)
