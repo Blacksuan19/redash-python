@@ -60,9 +60,13 @@ class NameMixin:
         """Check if an object with given `name_or_slug` exists"""
         return self.get_id(name_or_slug) is not None
 
-    def get_by_name(self, name_or_slug: str) -> Dict:
+    def get_by_name(self, name_or_slug: str) -> Optional[Dict]:
         """Get by name or slug"""
-        return self.get(self.get_id(name_or_slug))
+        obj_id = self.get_id(name_or_slug)
+        if obj_id is None:
+            return None
+
+        return self.get(obj_id)
 
     def get_id(self, name_or_slug: str) -> Optional[int]:
         """Get the ID for an object by name or slug, returns None if not found"""
