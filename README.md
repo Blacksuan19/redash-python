@@ -2,11 +2,30 @@
 
 python package for interacting with the Redash API
 
+## Features
+
+- Complete access to all endpoints in the Redash API
+- Pagination by default
+- Duplicate dashboards
+- Manage users and groups
+- Duplicate queries with differerent source tables
+
+### Implemented Services
+
+- [x] Dashboards
+- [x] Queries
+- [x] Data Sources
+- [x] Alerts
+- [x] Users
+- [x] Destinations
+- [x] Groups
+- [x] query_snippets
+
 ## Getting Started
 
 an API key is required in addition to the instance's host URL.
 
-## Installation
+### Installation
 
 ```bash
 pip install redash-python
@@ -51,6 +70,14 @@ print(rd.services)
 print(rd.users)
 ```
 
+for a full list of implemented methods in each service, print the service
+object.
+
+```python
+>>> print(client.dashboards)
+DashboardsService(attributes: ['endpoint'], methods: ['create', 'create_widget', 'delete', 'duplicate', 'exists', 'favorite', 'favorited', 'get', 'get_all', 'get_by_name', 'get_by_tags', 'get_id', 'get_slug', 'paginate', 'publish', 'refresh', 'share', 'unfavorite', 'unpublish', 'update'])
+```
+
 for more examples on usage, see examples folder on github.
 
 ## Development
@@ -64,7 +91,26 @@ pip install redash-python[dev]
 ### Architecture
 
 this library implements a services based architecture splitting each API
-endpoint group to its own service, on top of which is the `Redash` class.
+endpoint group to its own service, on top of which is the `Redash` class. all
+the services share base classes from mixins that make it easier to share common
+behavior and allows rapid development for any new endpoints. for instance adding
+query_snippets is as simple as:
+
+```python
+from .base import BaseService
+from .mixins import CommonMixin, NameMixin, PrintMixin
+
+
+class QSnipsService(CommonMixin, NameMixin, PrintMixin):
+    def __init__(self, base: BaseService) -> None:
+
+        # init mixins
+        CommonMixin.__init__(self, base)
+
+        self.endpoint = "/api/query_snippets"
+```
+
+### Directory Structure
 
 ```bash
 redash_python
@@ -75,28 +121,10 @@ redash_python
     └── mixins.py           # Mixins for services with shared functionality
 ```
 
-### Implemented Services
+## Contributing
 
-- [x] Dashboards
-- [x] Queries
-- [x] Data Sources
-- [x] Alerts
-- [x] Users
-- [x] Destinations
-- [x] Groups
-- [x] query_snippets
+Contributions are welcome, please open an issue or PR to propse any changes.
 
-### Meta features
+## License
 
-- [x] Pagination
-- [x] Duplicate dashboards
-- [x] Duplicate query with a different source table from same data source
-
-for a full list of implemented methods in each service, print the service
-object.
-
-```python
-
->>> print(client.dashboards)
-DashboardsService(attributes: ['endpoint'], methods: ['create', 'create_widget', 'delete', 'duplicate', 'exists', 'favorite', 'favorited', 'get', 'get_all', 'get_by_name', 'get_by_tags', 'get_id', 'get_slug', 'paginate', 'publish', 'refresh', 'share', 'unfavorite', 'unpublish', 'update'])
-```
+BSD 2-Clause License. See LICENSE for more information.
