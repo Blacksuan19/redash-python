@@ -18,6 +18,14 @@ theme:
         - yaml
         - python
         - bash
+    features:
+        - navigation.instant
+        - navigation.sections
+        - navigation.top
+        - search.suggest
+        - search.highlight
+        - search.share
+        - offline
     
     shortcuts: 
       help: 191    # ?
