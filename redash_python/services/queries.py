@@ -7,7 +7,7 @@ from .mixins import (
     NameMixin,
     PaginationMixin,
     PrintMixin,
-    PublishMxin,
+    PublishMixin,
     TagsMixin,
 )
 
@@ -16,7 +16,7 @@ class QueriesService(
     FavoriteMixin,
     CommonMixin,
     TagsMixin,
-    PublishMxin,
+    PublishMixin,
     NameMixin,
     PrintMixin,
     PaginationMixin,
@@ -26,7 +26,7 @@ class QueriesService(
         # init mixins
         FavoriteMixin.__init__(self, base)
         CommonMixin.__init__(self, base)
-        PublishMxin.__init__(self, base)
+        PublishMixin.__init__(self, base)
         PaginationMixin.__init__(self, base)
 
         self.__base = base

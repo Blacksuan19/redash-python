@@ -110,7 +110,7 @@ class TagsMixin:
         return any(tag in obj.get("tags", []) for tag in tags)
 
 
-class PublishMxin:
+class PublishMixin:
     """Mixin for publishable services"""
 
     def __init__(self, base: BaseService) -> None:
