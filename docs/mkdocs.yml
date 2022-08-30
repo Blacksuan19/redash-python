@@ -73,14 +73,15 @@ copyright: Copyright &copy; 2022 <a href="https://blacksuan19.dev">Blacksuan19</
 nav:
 - Home: index.md
 - API Documentation:
-    - Redash: api/redash.md
-    - Data Sources: api/services/data_sources.md
-    - Dashboards: api/services/dashboards.md
-    - Queries: api/services/queries.md
-    - Query Snippets: api/services/query_snippets.md
-    - Groups: api/services/groups.md
-    - Users: api/services/users.md
     - Alerts: api/services/alerts.md
     - Base: api/services/base.md
+    - Dashboards: api/services/dashboards.md
+    - Data Sources: api/services/data_sources.md
+    - Destinations: api/services/destinations.md
+    - Groups: api/services/groups.md
     - Mixins: api/services/mixins.md
+    - Queries: api/services/queries.md
+    - Query Snippets: api/services/query_snippets.md
+    - Redash: api/redash.md
+    - Users: api/services/users.md
 - Examples: examples.md
