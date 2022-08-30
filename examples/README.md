@@ -10,3 +10,8 @@ for more information about how each of the scripts work, run the script with the
 
 this script archives all users queries and dashboards that don't match a specifc
 set of tags.
+
+## Create Client Dashboard
+
+Create client dashboard template based on another template with given tags with
+widgets containing specificed keywords in their viualization name removed.
