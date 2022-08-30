@@ -105,3 +105,7 @@ class DashboardsService(
             width=1,
         )
         return self.__base.post("/api/widgets", data)
+
+    def delete_widget(self, id: int) -> None:
+        """delete widget by id"""
+        self.__base.delete(f"/api/widgets/{id}")
