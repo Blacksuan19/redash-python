@@ -85,18 +85,24 @@ class NameMixin:
 class TagsMixin:
     """Mixin for taggable services"""
 
-    def get_by_tags(self, tags: List[str], without: bool = False) -> List[Dict]:
-        """Get all objects with `tags` or all objects without any of `tags`"""
+    def get_by_tags(
+        self, tags: List[str], without: bool = False, match_all: bool = True
+    ) -> List[Dict]:
+        """Get all objects with all or any of `tags` or all objects without any of `tags`"""
         all_objects = self.get_all()
-
-        if "results" in all_objects:
-            all_objects = all_objects["results"]
 
         if without:
             return [
                 obj
                 for obj in all_objects
                 if not any(tag in obj.get("tags", []) for tag in tags)
+            ]
+
+        if match_all:
+            return [
+                obj
+                for obj in all_objects
+                if all(tag in obj.get("tags", []) for tag in tags)
             ]
 
         return [
