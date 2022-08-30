@@ -76,3 +76,4 @@ nav:
     - Widgets: api/services/widgets.md
 - Examples: 
     - Archive User: examples/archive_user.md
+    - Create client dashboard: examples/create_client_dashboard.md
