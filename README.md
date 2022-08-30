@@ -22,7 +22,8 @@ python package for interacting with the Redash API
 - [x] query_snippets
 - [x] Widgets\*
 
-\* widgets endpoint does not support GET requests, only update, and create.
+\* widgets endpoint does not support GET requests, only update, delete and
+create.
 
 ## Getting Started
 
