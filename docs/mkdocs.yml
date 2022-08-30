@@ -61,10 +61,6 @@ plugins:
     - search
     - minify:
         minify_html: true
-    # - git-revision-date-localized:
-    #     type: timeago
-    # - git-authors:
-    #     show_contribution: True
     - table-reader
     - img2fig
     - mknotebooks:
