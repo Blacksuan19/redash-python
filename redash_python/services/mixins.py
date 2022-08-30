@@ -92,24 +92,22 @@ class TagsMixin:
         all_objects = self.get_all()
 
         if without:
-            return [
-                obj
-                for obj in all_objects
-                if not any(tag in obj.get("tags", []) for tag in tags)
-            ]
+            return list(
+                filter(
+                    lambda obj: not self.__has_tags(obj, tags, match_all), all_objects
+                )
+            )
 
+        return list(
+            filter(lambda obj: self.__has_tags(obj, tags, match_all), all_objects)
+        )
+
+    def __has_tags(self, obj: Dict, tags: List[str], match_all: bool = True) -> bool:
+        """Check if an object has all or any of `tags`"""
         if match_all:
-            return [
-                obj
-                for obj in all_objects
-                if all(tag in obj.get("tags", []) for tag in tags)
-            ]
+            return all(tag in obj.get("tags", []) for tag in tags)
 
-        return [
-            obj
-            for obj in all_objects
-            if any(tag in obj.get("tags", []) for tag in tags)
-        ]
+        return any(tag in obj.get("tags", []) for tag in tags)
 
 
 class PublishMxin:
