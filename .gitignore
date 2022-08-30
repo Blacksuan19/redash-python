@@ -9,3 +9,4 @@ jetfiles_python.egg-info
 .vscode
 redash_python.egg-info
 *.ipynb
+**/_site

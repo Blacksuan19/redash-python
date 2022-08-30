@@ -1,0 +1,7 @@
+template "mkdocs"
+
+action "preprocess-markdown" {
+  use "pydoc" {
+    loader().search_path = [ '../redash_python', '../redash_python/services', '../examples' ]
+  }
+}
