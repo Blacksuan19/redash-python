@@ -11,3 +11,4 @@ mkdocs-enumerate-headings-plugin # enumerates headings across markdown pages
 mkdocs-print-site-plugin # allows visiters to File > Print > Save as PDF entire markdown documentation
 mkgendocs # generate MkDocs pages from Google-style docstrings of Python functions
 novella # custom build system for MkDocs
+pydoc-markdown # converts Python docstrings to Markdown
