@@ -14,7 +14,7 @@ from redash_python.services import (
     UsersService,
 )
 
-version = "0.3.0"
+version = "0.3.1"
 
 
 class Redash:
