@@ -46,13 +46,16 @@ plugins:
     - search
     - minify:
         minify_html: true
-    - table-reader
-    - img2fig
-    - mknotebooks:
-        execute: false
-        enable_default_jupyter_cell_styling: false
-        enable_default_pandas_dataframe_styling: true
-    - awesome-pages
+
+extra:
+  social:
+    - icon: fontawesome/brands/github 
+      link: https://github.com/Blacksuan19/redash-python
+      name: redash-python on github
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/redash-python
+      name: redash-python on pypi
+  generator: false
 
 copyright: Copyright &copy; 2022 <a href="https://blacksuan19.dev">Blacksuan19</a>.
 
