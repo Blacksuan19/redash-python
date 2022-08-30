@@ -1,3 +1,6 @@
+"""Archive all queries and dashboards witohut given tags
+"""
+
 from redash_python import Redash
 from typer import Argument, Typer
 
@@ -15,13 +18,28 @@ def clean(
 ) -> None:
     """
     Clean up all the customer dashboards on redash
+
+    Args:
+        host_url: Redash host
+        api_key: Redash api key
+
+    Returns:
+        None
+
+    Usage:
+        ```bash
+        python archive_user.py host_url api_key
+
+        ```
     """
 
     rd = Redash(host_url, api_key)
 
     admin_tags = ["admin", "template", "maintenance"]
-    user_ques = rd.queries.get_by_tags(tags=admin_tags, without=True)
-    user_dashs = rd.dashboards.get_by_tags(tags=admin_tags, without=True)
+    user_ques = rd.queries.get_by_tags(tags=admin_tags, without=True, match_all=False)
+    user_dashs = rd.dashboards.get_by_tags(
+        tags=admin_tags, without=True, match_all=False
+    )
 
     if not user_ques:
         print("No user Queries found!")
