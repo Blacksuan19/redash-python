@@ -34,31 +34,9 @@ theme:
       search: 83   # s
 
 markdown_extensions:
-    - codehilite
-    - markdown.extensions.admonition
-    - markdown.extensions.attr_list
-    - markdown.extensions.codehilite:
-        guess_lang: false
-    - markdown.extensions.def_list
     - markdown.extensions.footnotes
     - markdown.extensions.meta
-    - markdown.extensions.toc:
-        permalink: true
-    - pymdownx.arithmatex:
-        generic: true
-    - pymdownx.betterem:
-        smart_enable: all
-    - pymdownx.caret
-    - pymdownx.critic
-    - pymdownx.details
-    - pymdownx.inlinehilite
-    - pymdownx.keys
-    - pymdownx.mark
-    - pymdownx.smartsymbols
-    - pymdownx.snippets:
-        check_paths: true
     - pymdownx.superfences
-    - pymdownx.tabbed
     - pymdownx.tasklist:
         custom_checkbox: true
     - pymdownx.tilde
