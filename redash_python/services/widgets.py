@@ -8,7 +8,7 @@ class WidgetsService(CommonMixin, PrintMixin):
     """
     Service for managing widgets
 
-    - only supports create, delete and update (DELETE, UPDATE)
+    - only supports create, delete and update (DELETE, POST)
     - does not support get_all or get (GET)
     """
 
