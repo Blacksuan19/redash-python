@@ -78,6 +78,8 @@ class DashboardsService(
                 text=widget.get("text"),
             )
 
+        return self.get(new_dash.get("id"))
+
     def create_widget(
         self,
         *,
