@@ -8,3 +8,4 @@ from .mixins import *
 from .queries import QueriesService
 from .query_snippets import QSnipsService
 from .users import UsersService
+from .widgets import WidgetsService

@@ -1,4 +1,4 @@
-from typing import Dict, List, Optional, final
+from typing import Dict, List, NoReturn, Optional, final
 
 from .base import BaseService
 
@@ -11,7 +11,9 @@ class PrintMixin:
         object_methods = [
             method_name
             for method_name in dir(self)
-            if callable(getattr(self, method_name)) and not method_name.startswith("_")
+            if callable(getattr(self, method_name))
+            and not method_name.startswith("_")
+            and getattr(self, method_name).__annotations__.get("return") is not NoReturn
         ]
         object_attributes = [
             attribute_name

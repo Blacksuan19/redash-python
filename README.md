@@ -20,6 +20,9 @@ python package for interacting with the Redash API
 - [x] Destinations
 - [x] Groups
 - [x] query_snippets
+- [x] Widgets\*
+
+\* widgets endpoint does not support GET requests, only update, and create.
 
 ## Getting Started
 

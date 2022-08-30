@@ -12,6 +12,7 @@ from redash_python.services import (
     QSnipsService,
     QueriesService,
     UsersService,
+    WidgetsService,
 )
 
 version = "0.3.3"
@@ -45,6 +46,7 @@ class Redash:
         self.users = UsersService(self.__base)
         self.groups = GroupsService(self.__base)
         self.query_snippets = QSnipsService(self.__base)
+        self.widgets = WidgetsService(self.__base)
 
         # keep track of services
         attr_dict = self.__dict__

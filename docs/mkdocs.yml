@@ -73,5 +73,6 @@ nav:
     - Query Snippets: api/services/query_snippets.md
     - Redash: api/redash.md
     - Users: api/services/users.md
+    - Widgets: api/services/widgets.md
 - Examples: 
     - Archive User: examples/archive_user.md
