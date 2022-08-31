@@ -79,3 +79,29 @@ class DashboardsService(
             )
 
         return self.get(new_dash.get("id"))
+
+    def create_widget(
+        self,
+        *,
+        dashboard_id: int,
+        visualization_id: Optional[int],
+        options: Dict,
+        text: str = "",
+    ) -> Dict:
+        """
+        create new widget in given dashboard
+
+        Args:
+            dashboard_id: id of dashboard to create widget in
+            visualization_id: id of visualization to use for widget (pass None for text widget)
+            options: options to use for widget
+            text: text to use for text widget
+        """
+        data = dict(
+            dashboard_id=dashboard_id,
+            text=text,
+            options=options,
+            visualization_id=visualization_id,
+            width=1,
+        )
+        return self.__base.post("/api/widgets", data)
