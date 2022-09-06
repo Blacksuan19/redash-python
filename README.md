@@ -2,6 +2,10 @@
 
 python package for interacting with the Redash API
 
+[![PyPI version](https://badge.fury.io/py/redash-python.svg)](https://badge.fury.io/py/redash-python)
+[![Release and Publish wheel package](https://github.com/Blacksuan19/redash-python/actions/workflows/publish.yml/badge.svg?branch=0.3.9)](https://github.com/Blacksuan19/redash-python/actions/workflows/publish.yml)
+[![Build and Publish Docs](https://github.com/Blacksuan19/redash-python/actions/workflows/docs.yml/badge.svg?branch=0.3.9)](https://github.com/Blacksuan19/redash-python/actions/workflows/docs.yml)
+
 ## Features
 
 - Complete access to all endpoints in the Redash API
