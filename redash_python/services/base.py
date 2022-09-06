@@ -6,8 +6,9 @@ import requests
 class BaseService:
     """Singleton Base Service class"""
 
-    def __init__(self, base_url: str, api_key: str) -> None:
+    def __init__(self, base_url: str, api_key: str, **kwargs) -> None:
         self.base_url = base_url
+        super().__init__(**kwargs)
 
         # configure session
         self.__session = requests.Session()

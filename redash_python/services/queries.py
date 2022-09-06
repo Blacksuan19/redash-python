@@ -22,14 +22,7 @@ class QueriesService(
     PaginationMixin,
 ):
     def __init__(self, base: BaseService) -> None:
-
-        # init mixins
-        FavoriteMixin.__init__(self, base)
-        CommonMixin.__init__(self, base)
-        PublishMixin.__init__(self, base)
-        PaginationMixin.__init__(self, base)
-
-        self.__base = base
+        super().__init__(base=base)
         self.endpoint = "/api/queries"
 
     def get_all(self) -> List[Dict]:
