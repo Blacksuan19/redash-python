@@ -72,12 +72,7 @@ class NameMixin:
 
     def get_id(self, name_or_slug: str) -> Optional[int]:
         """Get the ID for an object by name or slug, returns None if not found"""
-        all_obj: List[Dict] = self.get_all()
-
-        if "results" in all_obj:
-            all_obj = all_obj["results"]
-
-        for obj in all_obj:
+        for obj in self.get_all():
             if obj.get("name") == name_or_slug or obj.get("slug") == name_or_slug:
                 return obj.get("id")
 
