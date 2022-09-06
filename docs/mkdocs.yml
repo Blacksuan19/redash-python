@@ -4,6 +4,7 @@ site_description: A more complete Python library for Redash
 site_author: Blacksuan19
 
 repo_url: https://github.com/blacksuan19/redash-python
+edit_uri: ""
 
 theme:
     name: material
