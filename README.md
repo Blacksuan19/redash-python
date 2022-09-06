@@ -2,9 +2,11 @@
 
 python package for interacting with the Redash API
 
-[![PyPI version](https://badge.fury.io/py/redash-python.svg)](https://badge.fury.io/py/redash-python)
-[![Release and Publish wheel package](https://github.com/Blacksuan19/redash-python/actions/workflows/publish.yml/badge.svg?branch=0.3.10)](https://github.com/Blacksuan19/redash-python/actions/workflows/publish.yml)
-[![Build and Publish Docs](https://github.com/Blacksuan19/redash-python/actions/workflows/docs.yml/badge.svg?branch=0.3.10)](https://github.com/Blacksuan19/redash-python/actions/workflows/docs.yml)
+[![view - Documentation](https://img.shields.io/badge/PyPi-0.3.10-blue?style=for-the-badge)](https://pypi.org/project/redash-python "view package on PyPi")
+&nbsp;&nbsp;&nbsp;
+[![view - Documentation](https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge)](https://blacksuan19.dev/redash-python/ "go to documentation")
+&nbsp;&nbsp;&nbsp;
+![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)
 
 ## Features
 
@@ -132,4 +134,4 @@ Contributions are welcome, please open an issue or PR to propse any changes.
 
 ## License
 
-BSD 2-Clause License. See LICENSE for more information.
+[![view - Documentation](https://img.shields.io/badge/License-BSD%202%20Clause-green?style=for-the-badge)](https://github.com/Blacksuan19/redash-python/blob/master/LICENSE "View License")
