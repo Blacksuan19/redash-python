@@ -1,4 +1,3 @@
-from http import client
 from typing import List
 
 from redash_python import Redash
@@ -37,9 +36,9 @@ def create_client_template(
     ds = rd.dashboards
     omig_template = ds.get_by_tags(template_tags).pop()
 
-    new_id = ds.duplicate(omig_template.get("id"), new_name=f"{client} template").get(
-        "id"
-    )
+    new_id = ds.duplicate(
+        omig_template.get("id"), new_name=f"{client_name} template"
+    ).get("id")
 
     # set tags
     ds.update(new_id, tags=["template", client_name.lower()])
@@ -52,7 +51,7 @@ def create_client_template(
             ):
                 rd.widgets.delete(widget.get("id"))
 
-    print(f"Created {client} template with id {new_id}")
+    print(f"Created {client_name} template with id {new_id}")
 
 
 if __name__ == "__main__":
