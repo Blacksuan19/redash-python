@@ -22,8 +22,11 @@ class DashboardsService(
     PaginationMixin,
 ):
     def __init__(self, base: BaseService) -> None:
-        super().__init__(base=base)
+        CommonMixin.__init__(self, base)
+        FavoriteMixin.__init__(self, base)
         PaginationMixin.__init__(self, base)
+        PublishMixin.__init__(self, base)
+
         self.endpoint = "/api/dashboards"
 
     def get_all(self) -> List[Dict]:
