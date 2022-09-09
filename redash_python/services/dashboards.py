@@ -27,6 +27,7 @@ class DashboardsService(
         PaginationMixin.__init__(self, base)
         PublishMixin.__init__(self, base)
 
+        self.__base = base
         self.endpoint = "/api/dashboards"
 
     def get_all(self) -> List[Dict]:

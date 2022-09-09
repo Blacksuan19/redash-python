@@ -5,6 +5,8 @@ from .mixins import CommonMixin, NameMixin, PrintMixin
 class UsersService(CommonMixin, NameMixin, PrintMixin):
     def __init__(self, base: BaseService) -> None:
         CommonMixin.__init__(self, base)
+
+        self.__base = base
         self.endpoint = "/api/users"
 
     def disable(self, user_id: int) -> None:

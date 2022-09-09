@@ -14,6 +14,8 @@ class WidgetsService(CommonMixin, PrintMixin):
 
     def __init__(self, base: BaseService) -> None:
         CommonMixin.__init__(self, base)
+
+        self.__base = base
         self.endpoint = "/api/widgets"
 
     def get_all(self) -> NoReturn:
