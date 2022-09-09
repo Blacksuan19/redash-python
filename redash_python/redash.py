@@ -15,7 +15,7 @@ from redash_python.services import (
     WidgetsService,
 )
 
-version = "0.3.14"
+version = "0.3.15"
 
 
 class Redash:
