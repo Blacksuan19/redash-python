@@ -149,15 +149,19 @@ class PaginationMixin:
 
     def paginate(self, page: int = 1, page_size: int = 100, **kwargs) -> List[Dict]:
         """Load all items of a paginated resource"""
+        items = []
+        while True:
+            page_items = self.fetch_page(page, page_size, **kwargs)
+            items.extend(page_items)
+            if len(page_items) < page_size:
+                break
+            page += 1
+
+        return items
+
+    def fetch_page(self, page: int = 1, page_size: int = 100, **kwargs) -> List[Dict]:
+        """Load a page of a paginated resource"""
         response = self.__base.get(
             self.endpoint, {"page": page, "page_size": page_size}, **kwargs
         )
-        items = response.get("results")
-        if response.get("page") * response.get("page_size") >= response.get("count"):
-            return items
-
-        else:
-            return [
-                *items,
-                *self.paginate(page + 1, page_size, **kwargs),
-            ]
+        return response.get("results")
