@@ -2,7 +2,7 @@
 
 python package for interacting with the Redash API
 
-[![view - Documentation](https://img.shields.io/badge/PyPi-0.3.18-blue?style=for-the-badge)](https://pypi.org/project/redash-python "view package on PyPi")
+[![view - Documentation](https://img.shields.io/badge/PyPi-0.3.19-blue?style=for-the-badge)](https://pypi.org/project/redash-python "view package on PyPi")
 &nbsp;&nbsp;&nbsp;
 [![view - Documentation](https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge)](https://www.blacksuan19.dev/redash-python/ "go to documentation")
 &nbsp;&nbsp;&nbsp;
