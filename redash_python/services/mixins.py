@@ -113,13 +113,13 @@ class PublishMixin:
     def __init__(self, base: BaseService) -> None:
         self.__base = base
 
-    def publish(self, dashboard_id: int) -> Dict:
+    def publish(self, id: int) -> Dict:
         """Publish an object"""
-        return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"is_draft": False})
+        return self.__base.post(f"{self.endpoint}/{id}", {"is_draft": False})
 
-    def unpublish(self, dashboard_id: int) -> Dict:
+    def unpublish(self, id: int) -> Dict:
         """Unpublish an object"""
-        return self.__base.post(f"{self.endpoint}/{dashboard_id}", {"is_draft": True})
+        return self.__base.post(f"{self.endpoint}/{id}", {"is_draft": True})
 
 
 class FavoriteMixin:
