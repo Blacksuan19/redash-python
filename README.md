@@ -6,7 +6,7 @@ python package for interacting with the Redash API
 &nbsp;&nbsp;&nbsp;
 [![view - Documentation](https://img.shields.io/badge/view-Documentation-blue?style=for-the-badge)](https://www.blacksuan19.dev/redash-python/ "go to documentation")
 &nbsp;&nbsp;&nbsp;
-[![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)](# "Buildwith github actions")
+[![GitHub Actions](https://img.shields.io/badge/github%20actions-%232671E5.svg?style=for-the-badge&logo=githubactions&logoColor=white)](# "Build with github actions")
 
 ## Features
 
@@ -113,7 +113,10 @@ from .mixins import CommonMixin, NameMixin, PrintMixin
 
 class QSnipsService(CommonMixin, NameMixin, PrintMixin):
     def __init__(self, base: BaseService) -> None:
-        super().__init__(base=base)
+        # init mixins
+        CommonMixin.__init__(self, base)
+
+        self.__base = base
         self.endpoint = "/api/query_snippets"
 ```
 
