@@ -10,11 +10,11 @@ python package for interacting with the Redash API
 
 ## Features
 
-- Complete access to all endpoints in the Redash API
-- Pagination by default
-- Duplicate dashboards
-- Manage users and groups
-- Duplicate queries with differerent source tables
+- Complete access to all endpoints in the Redash API.
+- Pagination by default.
+- Duplicate dashboards.
+- Manage users and groups.
+- Duplicate queries with different source tables.
 
 ### Implemented Services
 
@@ -92,7 +92,7 @@ for more examples on usage, see examples folder on github.
 
 ## Development
 
-before starting development, install dev depndencies:
+before starting development, install dev dependencies:
 
 ```bash
 pip install redash-python[dev]
@@ -133,7 +133,7 @@ redash_python
 
 ## Contributing
 
-Contributions are welcome, please open an issue or PR to propse any changes.
+Contributions are welcome, please open an issue or PR to propose any changes.
 
 ## License
 
