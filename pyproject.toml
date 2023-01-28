@@ -22,8 +22,8 @@ requires-python = ">=3.7"
 dev = ["black", "bumpver", "pip-tools", "wheel", "requests"]
 
 [project.urls]
-Homepage = "https://blacksuan19.dev/redash-python"
-Documentation = "https://blacksuan19.dev/redash-python"
+Homepage = "https://redash.blacksuan19.dev/"
+Documentation = "https://redash.blacksuan19.dev/"
 Repository = "https://github.com/blacksuan19/redash-python/"
 Issues = "https://github.com/blacksuan19/redash-python/issues"
 
