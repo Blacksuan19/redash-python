@@ -162,6 +162,8 @@ class PaginationMixin:
     def fetch_page(self, page: int = 1, page_size: int = 100, **kwargs) -> List[Dict]:
         """Load a page of a paginated resource"""
         response = self.__base.get(
-            self.endpoint, {"page": page, "page_size": page_size}, **kwargs
+            self.endpoint,
+            params=dict(page=page, page_size=page_size),
+            **kwargs,
         )
         return response.get("results")
