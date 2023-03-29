@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 import requests
 
@@ -32,10 +32,10 @@ class Redash:
         >>> rd.dashboards.get_all()
     """
 
-    def __init__(self, base_url: str, api_key: str) -> None:
+    def __init__(self, base_url: str, api_key: str, session: Optional[requests.Session] = None) -> None:
         self.version = version
 
-        self.__base = BaseService(base_url, api_key)
+        self.__base = BaseService(base_url, api_key, session=session)
 
         # Initialize services
         self.dashboards = DashboardsService(self.__base)
