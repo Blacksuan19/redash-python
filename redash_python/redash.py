@@ -25,6 +25,7 @@ class Redash:
     Args:
         base_url (str): The base URL of the Redash instance.
         api_key (str): The API key for the Redash instance.
+        session (requests.Session, optional): A requests session object to use for requests.
 
     Usage:
         >>> from redash_python import Redash
@@ -32,7 +33,12 @@ class Redash:
         >>> rd.dashboards.get_all()
     """
 
-    def __init__(self, base_url: str, api_key: str, session: Optional[requests.Session] = None) -> None:
+    def __init__(
+        self,
+        base_url: str,
+        api_key: str,
+        session: Optional[requests.Session] = None,
+    ) -> None:
         self.version = version
 
         self.__base = BaseService(base_url, api_key, session=session)
