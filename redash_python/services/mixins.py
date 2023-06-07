@@ -58,22 +58,27 @@ class CommonMixin:
 class NameMixin:
     """Mixin for nameable services (by name or slug)."""
 
-    def exists(self, name_or_slug: str) -> bool:
-        """Check if an object with given `name_or_slug` exists"""
-        return self.get_id(name_or_slug) is not None
+    def exists(self, name_slug_email: str) -> bool:
+        """Check if an object with given name, slug or email (for users) exists"""
+        return self.get_id(name_slug_email) is not None
 
-    def get_by_name(self, name_or_slug: str) -> Optional[Dict]:
-        """Get by name or slug"""
-        obj_id = self.get_id(name_or_slug)
+    def get_by_name(self, name_slug_email: str) -> Optional[Dict]:
+        """Get by name or slug or email (for users), returns None if not found"""
+        obj_id = self.get_id(name_slug_email)
         if obj_id is None:
             return None
 
         return self.get(obj_id)
 
-    def get_id(self, name_or_slug: str) -> Optional[int]:
-        """Get the ID for an object by name or slug, returns None if not found"""
+    def get_id(self, name_slug_email: str) -> Optional[int]:
+        """Get the ID for an object by name, slug, or email (for users), returns None if not found"""
         for obj in self.get_all():
-            if obj.get("name") == name_or_slug or obj.get("slug") == name_or_slug:
+            cond: bool = (
+                obj.get("name") == name_slug_email
+                or obj.get("slug") == name_slug_email  # for dashboards
+                or obj.get("email") == name_slug_email  # for users
+            )
+            if cond:
                 return obj.get("id")
 
         return None
