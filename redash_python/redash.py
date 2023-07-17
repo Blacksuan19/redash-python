@@ -78,6 +78,8 @@ class Redash:
             return False
         except requests.exceptions.ConnectTimeout:
             return False
+        except requests.exceptions.ConnectionError:
+            return False
 
     def __dir__(self) -> List[str]:
         return self.services + ["get", "post", "delete"]
